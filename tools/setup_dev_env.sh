@@ -1,4 +1,7 @@
 #!/bin/bash -x
+#make sure you run as root
+
+
 echo "Set up Raspberry Pi docker.\n"
 #curl -sSL https://get.docker.com | sh
 
@@ -8,11 +11,11 @@ echo "Create a network for our monitor.\n"
 docker network create --driver bridge --subnet 172.18.0.0/16 rack_nw
 
 #build the base python image
-docker build -t 
+~/rackbrain/tools/baseimage/make.sh
 
 mkdir -p /opt/mongdata
 #get the containers we need
-#mongo
+#build the mongo image
 docker pull andresvidal/rpi3-mongodb3
 
 #rename the repo

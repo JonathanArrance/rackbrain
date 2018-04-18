@@ -1,18 +1,25 @@
-# Blockchain Mangement platform.
-Used to deploy a new block chain for a customer
+# Rackbrain rack intellegence platform.
+Used to monitor the status of an AV or IT rack 
 
 ## Environment.
-1. OS - CentOS Linux release 7.4.1708 (Core)
-2. Docker - Docker version 17.12.0-ce
-3. Dev Language - Python 2.7.5/3.6
-4. Mongo - Mongo 3.4.5
+1. OS - Raspian Stretch (9.4) - https://www.raspberrypi.org/downloads/raspbian/
+2. Docker - Docker version 18.04.0-ce
+3. Dev Language - Python 2.7.13
+4. Mongo - Mongo 3.0.4 (32bit mongo, 2gb Data limit)
 
-## Setup a test environment.
-1. Run the dev_env_setup.sh
-2. Use the test files in the unittest directory.
+##Hardware.
+Raspberry Pi 3 B or B+
+NOTE: This software may work on other pi versions, but has not been tested.
+DHT-11 temp sensors.
 
-NOTE: dev_env_setup.sh will setup all the following components in Docker as a SINGLE node. Please refer to the Tendermint docs to build a multi node testnet.
-http://tendermint.readthedocs.io/projects/tools/en/master/index.html
+##Alternate environment
+Raspian Desktop - https://www.raspberrypi.org/downloads/raspberry-pi-desktop/
+NOTE: This software is not tested on this platform, but should work.
+
+# Setup a dev environment.
+1. Install Raspian Stretch and enable SSH.
+2. Run ~/rackbrain/tools/setup_dev_env.sh.
+3. Ensure all of the base images have been created and that the rpi-mongo container is running.
 
 ## Run the Unittests
 1. cd unittests
@@ -20,15 +27,14 @@ http://tendermint.readthedocs.io/projects/tools/en/master/index.html
 
 ## Tools used
 1. Robot 3T - Mongo interface
-2. MongoDB 3.4.5
-3. Gunicorn 19.7.1
+2. Komodo IDE
 
 ## Build, Run, Rebuild the containers
 1. Build the container from docker file - make.sh
 2. Run the contianer - run_container.sh
 3. Stop and remove from images repo - stop_container.sh
 
-## API Examples
+# API Examples
 Create new user account
 curl -i -X POST -H "Content-Type: application/json" -d '{"username":"paul","password":"python"}' -k https://192.168.10.9:8443/api/users
 
@@ -38,4 +44,4 @@ curl -u paul:python -i -k -X GET https://192.168.10.9:8443/api/token
 Use the token to talk to endpoint
 curl -u eyJhbGciOiJIUzI1NiIsImV4cCI6MTUxOTE0NzExNSwiaWF0IjoxNTE5MTQzNTE1fQ.eyJ1c2VyaWQiOjgzNTQ1NjMyODExNzAxMzgwMzV9.BX0xOSSDLmFiBzANy5pMCYfxkB4edgao3O4IK8akO4c:x -i -k -X GET https://192.168.10.9:8443/api/users
 
-## TODO
+# TODO
