@@ -1,0 +1,1 @@
+#add control for fans in here, or other devices
