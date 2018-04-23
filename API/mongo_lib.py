@@ -152,7 +152,11 @@ class Reading(db.Document):
     def sid(self,sensorid):
         pass
 
-class Device(db.Document):
+class AttachedDevice(db.Document):
     devicetype = db.StringField()
     deviceid = db.AnythingField()
+
+class RackBrainSys(db.Document):
+    rackbrainlocation = db.StringField()
+    
     

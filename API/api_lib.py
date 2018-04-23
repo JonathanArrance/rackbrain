@@ -3,7 +3,7 @@ from mongo_lib import Account as Account
 from mongo_lib import AccountSpecs as AccountSpecs
 from mongo_lib import Sensor as Sensor
 from mongo_lib import Reading as Reading
-from mongo_lib import Device as Device
+from mongo_lib import AttachedDevice as Device
 
 def create_user(params=None):
     #Create a new user based on the params given
@@ -81,4 +81,10 @@ def update_user(input_dict):
             abort(400)
 
 def delete_user(user_id):
+    pass
+
+def insert_location(input_dict):
+    pass
+
+def update_location(input_dict):
     pass

@@ -1,5 +1,5 @@
 # Rackbrain rack intellegence platform.
-Used to monitor the status of an AV or IT rack 
+Used to monitor the status of an AV or IT rack.
 
 ## Environment.
 1. OS - Raspian Stretch (9.4) - https://www.raspberrypi.org/downloads/raspbian/
@@ -7,12 +7,12 @@ Used to monitor the status of an AV or IT rack
 3. Dev Language - Python 2.7.13
 4. Mongo - Mongo 3.0.4 (32bit mongo, 2gb Data limit)
 
-##Hardware.
+## Hardware.
 Raspberry Pi 3 B or B+
 NOTE: This software may work on other pi versions, but has not been tested.
 DHT-11 temp sensors.
 
-##Alternate environment
+## Alternate environment
 Raspian Desktop - https://www.raspberrypi.org/downloads/raspberry-pi-desktop/
 NOTE: This software is not tested on this platform, but should work.
 
@@ -36,7 +36,7 @@ NOTE: This software is not tested on this platform, but should work.
 
 # API Examples
 Create new user account
-curl -i -X POST -H "Content-Type: application/json" -d '{"username":"paul","password":"python"}' -k https://192.168.10.9:8443/api/users
+curl -i -X POST -H "Content-Type: application/json" -d '{"username":"paul","password":"python","role":"admin"}' -k https://192.168.10.9:8443/api/users
 
 Get a new token
 curl -u paul:python -i -k -X GET https://192.168.10.9:8443/api/token
