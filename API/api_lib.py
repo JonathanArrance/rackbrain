@@ -30,7 +30,7 @@ def create_user(params=None):
     specs.email('None')
     specs.social('None')
     specs.save()
-    
+
     return (jsonify({'username': user.username,'userid':userid}), 201)
 
 def get_user(userid):
@@ -45,10 +45,10 @@ def get_user(userid):
 
     user = Account.query.filter_by(userid=userid).first()
     user_spec = AccountSpecs.query.filter_by(userid=userid).first()
-    
+
     user_out = jsonify({'username':user.username,'role':user.role,'userid':user.userid,'firstname':user_spec.firstname,
                                 'lastname':user_spec.lastname,'email':user_spec.email})
-    
+
     return user_out
 
 def get_users(params=None):
@@ -73,7 +73,7 @@ def update_user(input_dict):
     #          404no user found
     if Account.query.filter_by(userid=params['userid']).first() is None:
         abort(404)   # no user found
-    
+
     #check if update values are acceptable
     values = ['username','role','firstname','lastname','email','userid']
     for k in input_dict.keys:
@@ -83,6 +83,46 @@ def update_user(input_dict):
 def delete_user(user_id):
     pass
 
+#Sensor API workers
+def insert_sensor(input_dict):
+    pass
+
+def delete_sensor(sensor_id):
+    pass
+
+def get_sensors():
+    pass
+
+def get_sensor(sensor_id):
+    pass
+
+
+#Attached devices
+def get_devices():
+    pass
+
+def get_device(device_id):
+    pass
+
+def delete_device(device_id):
+    pass
+
+def add_device(input_dict):
+    pass
+
+#Backend Only workers
+#Reading API workers
+def get_readings(input_dict):
+    #sensorID, date/time(timestamp),daterange(min timestamp, max timestamp)
+    pass
+
+def get_all_readings(sensorid):
+    pass
+
+def insert_reading(input_dict):
+    pass
+
+#location API workers
 def insert_location(input_dict):
     pass
 
