@@ -1,7 +1,8 @@
 from flask import  jsonify,abort
 from mongo_lib import Account as Account
 from mongo_lib import AccountSpecs as AccountSpecs
-from mongo_lib import Sensor as Sensor
+from mongo_lib import SensorInventory
+from mongo_lib import SensorCatalog as SensorCatalog
 from mongo_lib import Reading as Reading
 from mongo_lib import AttachedDevice as Device
 
@@ -46,65 +47,85 @@ def get_user(userid):
     user = Account.query.filter_by(userid=userid).first()
     user_spec = AccountSpecs.query.filter_by(userid=userid).first()
 
-    user_out = jsonify({'username':user.username,'role':user.role,'userid':user.userid,'firstname':user_spec.firstname,
-                                'lastname':user_spec.lastname,'email':user_spec.email})
-
-    return user_out
-
-def get_users(params=None):
-    #Return a list of users based on the role given. If no role given all roles returned except internal roles.
-    #if the role is not given and the role of the user makeing the call is internal return all
-    return "get users test"
+    return (jsonify({'username':user.username,'role':user.role,'userid':user.userid,'firstname':user_spec.firstname,
+                                'lastname':user_spec.lastname,'email':user_spec.email}),201)
 
 def update_user(input_dict):
     #Update the variables in the input dict
-    #input: dict - username
-    #                - role
-    #                - userid
-    #                - firstname
-    #                - lastname
-    #               - email
-    #output: dict - username
-    #                 - role
-    #                 - firstname
-    #                 - lastname
-    #                 - email
     #error:  400 invalid value
-    #          404no user found
+    #          404 no user found
     if Account.query.filter_by(userid=params['userid']).first() is None:
         abort(404)   # no user found
 
     #check if update values are acceptable
-    values = ['username','role','firstname','lastname','email','userid']
-    for k in input_dict.keys:
-        if k not in values:
-            abort(400)
+    #values = ['username','role','firstname','lastname','email','userid']
+    #for k in input_dict.keys:
+    #   if k not in values:
+    #        abort(400)
+    return ('Not implemented',201)
 
-def delete_user(user_id):
+def list_users():
+    #Return a list of users based on the role given. If no role given all roles returned except internal roles.
+    #if the role is not given and the role of the user makeing the call is internal return all
+    return ('Not implemented',201)
+
+def delete_user(userid=None):
     pass
+    #return ('Not implemented',201)
 
 #Sensor API workers
-def insert_sensor(input_dict):
-    pass
+#Used to get info from the db in regards to the sensors attached to the rackbrain
+def create_sensor(params=None):
+    #400 if invalid sensortype is given
+    sc = SensorCatalog.sensorinfo()
+    if params is None:
+        abort(400)
+    if params['sensorname'] is None or params['sensortype'] is None:
+        abort(400)    # missing arguments
+    if SensorInventory.query.filter_by(sensorname=params['sensorname']).first() is not None:
+        abort(409)   # existing sensor
+    if SensorCatalog.query.filter_by(sensortype=params['sensortype']).first() is None:
+        abort(409)   # sensor type is not in the catalog
 
-def delete_sensor(sensor_id):
-    pass
+    sensor = SensorInventory(sensorname=params['sensorname'])
+    sensorid = sensor.gen_id()
+    sensor.sensortype(params['sensortype'])
+    sensor.sensordesc(params['sensordesc'])
+    sensor.save()
+    return (jsonify({'sensorname': sensor.sensorname,'sensorid':sensorid}), 201)
 
 def get_sensors():
-    pass
+    return ("Not implemented",201)
 
-def get_sensor(sensor_id):
-    pass
+def get_sensor(sensorid=None):
+    if(sensorid is None):
+        abort(400)
+    sensor = SensorInventory.query.filter_by(sensorid=sensorid).first()
+    return (jsonify({'sensorname':sensor.sensorname,'sensorid':sensor.sensorid,'sensortype':sensor.sensortype,'sensordesc':sensor.sensordesc}),201)
 
+def delete_sensor(sensorid=None):
+    if(sensorid is None):
+        abort(400)
+    sensor = SensorInventroy(sensorid=sensorid)
+    sensor.remove()
+    
+    
 
 #Attached devices
-def get_devices():
-    pass
+#Devices can be fans, LCD screens, power outlets, etc.
+def list_devices():
+    devices = Device.query()
+    return devices
 
-def get_device(device_id):
-    pass
+def get_device(deviceid):
+    if(deviceid is None):
+        abort(400)
+    device = Device.query.filter_by(deviceid=deviceid).first()
+    return (jsonify({'sensorname':sensor.sensorname,'sensorid':sensor.sensorid,'sensortype':sensor.sensortype,
+                          'sensordesc':sensor.sensordesc}),201)
 
-def delete_device(device_id):
+
+def delete_device(deviceid):
     pass
 
 def add_device(input_dict):

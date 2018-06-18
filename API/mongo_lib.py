@@ -102,21 +102,33 @@ class AccountSpecs(db.Document):
         self.lastname = lastname
 
     def email(self,email):
-        #need regex to check email
+        match = re.match('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$', email)
+        if(match == None):
+            abort(406)
         self.email = email
 
     def userid(self,userid):
         #need regex to check email
         self.userid = userid
 
-class Sensor(db.Document):
+class SensorCatalog(db.Document):
+    #Catalog of supported sensors, updated from time to time
+    sensortype = db.StringField()
+    sensorname = db.StringField()
+    sensorid = db.AnythingField()
+    sensordesc = db.StringField()
+    
+    def sensorinfo(self):
+        return {"sensortype":sensortype,"sensorname":sensorname,"sensorid":sensorid,"sensordesc":sensordesc}
+
+class SensorInventory(db.Document):
+    #Inventory of sensors attached to the rackbrain 
     sensortype = db.StringField()
     sensorname = db.StringField()
     sensorid = db.AnythingField()
     sensordesc = db.StringField()
     
     def sensortype(self,sensortype):
-        sensor_types = ['DHT11', 'DHT22', 'Power']
         if(stype in sensor_types):
             self.sensortype = stype
         else:
@@ -141,7 +153,7 @@ class Reading(db.Document):
         self.reading = reading
     
     def readingtype(self,readingtype):
-        values = ['temp','humidity','power']
+        values = ['temp','humidity','power','pressure']
         if readingtype not in values:
             abort(404)
         self.readingtype = readingtype
@@ -154,7 +166,10 @@ class Reading(db.Document):
 
 class AttachedDevice(db.Document):
     devicetype = db.StringField()
+    devicename = db.StringField()
     deviceid = db.AnythingField()
+
+    
 
 class RackBrainSys(db.Document):
     rackbrainlocation = db.StringField()
