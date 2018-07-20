@@ -32,7 +32,11 @@ def setup_mongo():
     if('RackBrainSys' not in collections):
        print "Creating RackBrainSys table with default values."
        #system level stuff
-       Sys = db.RackBrainSys.insert_many([{'rackid':rackid,'manufacture_date':now.isoformat(),'version':version}])
+       Sys = db.RackBrainSys.insert_many([{'rackid':rackid,
+                                           'manufacture_date':now.isoformat(),
+                                           'version':version,
+                                           'location':None,
+                                           'setup_date':None}])
     else:
        print "RackBrainSys table exists."
 
@@ -85,7 +89,10 @@ def setup_mongo():
 
     if('Sensor' not in collections):
        print "Creating a Sensor inventory table"
-       Sensor = db.Sensor.insert_many([{"sensortype":None,"sensorname":None,"sensorid":None,"sensordesc":None}])
+       Sensor = db.Sensor.insert_many([{"sensortype":None,
+                                        "sensorname":None,
+                                        "sensorid":None,
+                                        "sensordesc":None}])
     else:
        print "Sensor inventory table already exists"
 
@@ -93,31 +100,31 @@ def setup_mongo():
        print "Creating SensorCatalog table with default values."
        #build out the default sensors
        Sensor = db.SensorCatalog.insert_many([{
-                                       "sensortype":"DHT11",
+                                       "sensortype":"temp",
                                        "sensorname":"Temp and Humidity Sensor",
                                        "sensorid":"DHT11-001",
                                        "sensordesc": "General purpose temperature and humidity sensor."
                                        },
                                        {
-                                       "sensortype":"DHT22",
+                                       "sensortype":"temp",
                                        "sensorname":"Advanced Temp and Humidity Sensor",
                                        "sensorid":"DHT22-001",
                                        "sensordesc": "Highly sensative temperature and humidity sensor."
                                        },
                                        {
-                                       "sensortype":"Power",
+                                       "sensortype":"power",
                                        "sensorname":"Power",
                                        "sensorid":"Power",
                                        "sensordesc": "General purpose power sensor."
                                        },
                                        {
-                                       "sensortype":"Photo",
+                                       "sensortype":"photo",
                                        "sensorname":"PhotoSensor",
                                        "sensorid":"Photo",
                                        "sensordesc": "General purpose photo sensor."   
                                        },
                                        {
-                                       "sensortype":"Pressure",
+                                       "sensortype":"pressure",
                                        "sensorname":"PressureSensor",
                                        "sensorid":"Pressure",
                                        "sensordesc": "General purpose pressure sensor."
@@ -125,7 +132,32 @@ def setup_mongo():
     else:
        print "SensorCatalog table exists."
 
-    #return {"Accounts":Acc,"AccountSpecs":Aspec,"Sensor":Sensor}
+    if('Device' not in collections):
+       print "Creating a Device inventory table"
+       Device = db.Device.insert_many([{"devicetype":None,
+                                        "devicename":None,
+                                        "deviceid":None,
+                                        "devicedesc":None}])
+    else:
+       print "Device inventory table already exists"
+
+    if('DeviceCatalog' not in collections):
+       print "Creating DeviceCatalog table with default values."
+       #build out the default sensors
+       Device = db.DeviceCatalog.insert_many([{
+                                       "devicetype":"environment",
+                                       "devicename":"fan",
+                                       "deviceid":"FAN-001",
+                                       "devicedesc": "General purpose cooling fan."
+                                       },
+                                       {
+                                       "devicetype":"display",
+                                       "devicename":"small LCD",
+                                       "deviceid":"LCD-001",
+                                       "devicedesc": "General purpose LCD."
+                                       }])
+    else:
+       print "DeviceCatalog table exists."
 
 if __name__ == '__main__':
     #if (check_mongo() == 'down'):

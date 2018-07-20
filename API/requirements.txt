@@ -1,5 +1,5 @@
 requests==2.18.1
-pyOpenSSL==17.1.0
+#pyOpenSSL==17.1.0
 gunicorn==19.7.1
 passlib==1.7.1
 argon2_cffi==16.3.0

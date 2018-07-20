@@ -1,6 +1,7 @@
 #!/bin/python
 import random
 import sys
+import datetime
 #import tools_lib as tools
 import re
 
@@ -44,14 +45,6 @@ class Account(db.Document):
     role = db.StringField()
 
     def gen_id(self):
-        #self.userid = None
-        #if(self.username == str.lower("admin")):
-         #   self.userid == 001
-        #elif(self.username == str.lower("backend")):
-         #   self.userid == 002
-        #elif(self.username == str.lower("interface")):
-         #   self.userid == 003
-        #else:
         key_num = random.SystemRandom()
         self.userid = key_num.randint(0, sys.maxsize)
         return self.userid
@@ -80,36 +73,14 @@ class Account(db.Document):
             return None    # valid token, but expired
         except BadSignature as f:
             return None   # invalid token
-        #user = Account.query.get(data['userid'])
         user = mongo.db.Account.find_one({'userid':data['userid']})
         return user['userid']
 
 class AccountSpecs(db.Document):
+    userid = db.AnythingField()
     firstname = db.StringField()
     lastname = db.StringField()
-    email = db.AnythingField()
-    userid = db.AnythingField()
-    
-    #NOTE: Wenneed to make sure we have an API to verify the address
-    def fname(self,firstname):
-        if not firstname:
-            abort(406)
-        self.firstname = firstname
-
-    def lname(self,lastname):
-        if not lastname:
-            abort(406)
-        self.lastname = lastname
-
-    def email(self,email):
-        match = re.match('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$', email)
-        if(match == None):
-            abort(406)
-        self.email = email
-
-    def userid(self,userid):
-        #need regex to check email
-        self.userid = userid
+    email = db.StringField()
 
 class SensorCatalog(db.Document):
     #Catalog of supported sensors, updated from time to time
@@ -117,9 +88,11 @@ class SensorCatalog(db.Document):
     sensorname = db.StringField()
     sensorid = db.AnythingField()
     sensordesc = db.StringField()
-    
-    def sensorinfo(self):
-        return {"sensortype":sensortype,"sensorname":sensorname,"sensorid":sensorid,"sensordesc":sensordesc}
+
+    def sensortype(self,sensortype):
+        sensor_types = ['temp','photo','power','pressure']
+        if(str(sensortype).lower in sensor_types):
+            self.sensortype = sensortype
 
 class SensorInventory(db.Document):
     #Inventory of sensors attached to the rackbrain 
@@ -127,51 +100,114 @@ class SensorInventory(db.Document):
     sensorname = db.StringField()
     sensorid = db.AnythingField()
     sensordesc = db.StringField()
+    sensorserial = db.AnythingField()
+    
+    def sensorserial(self):
+        key_num = random.SystemRandom()
+        self.sensorserial = key_num.randint(0, sys.maxsize)
+        return self.sensorserial
     
     def sensortype(self,sensortype):
-        if(stype in sensor_types):
-            self.sensortype = stype
-        else:
-            abort(406)
+        self.sensortype = stype
 
     def sensorname(self,sensorname):
         self.sensorname = sensorname
     
     def sensorid(self,sensorid):
-        key_num = random.SystemRandom()
-        self.sensorid = key_num.randint(0, sys.maxsize)
-    
+        self.sensorid = sensorid
+
     def sensordesc(self,sensordesc):
         self.sensordesc = sensordesc
 
 class Reading(db.Document):
+    readingid = db.AnythingField()
+    readingtime = db.AnythingField()
     reading = db.StringField()
     readingtype = db.StringField()
-    sensorid = db.AnythingField()
+    sensorserial = db.AnythingField()
     
+    def readingid(self):
+        key_num = random.SystemRandom()
+        self.readingid = key_num.randint(0, sys.maxsize)
+        return self.readingid
+
+    def readingtime(self,readingdate):
+        self.readingtime = datetime.datetime.now().timestamp()
+
     def reading(self, reading):
         self.reading = reading
-    
+
     def readingtype(self,readingtype):
         values = ['temp','humidity','power','pressure']
         if readingtype not in values:
             abort(404)
         self.readingtype = readingtype
-    
-    def readingdate(self,readingdate):
-        pass
-    
-    def sid(self,sensorid):
-        pass
 
-class AttachedDevice(db.Document):
+    def sensor_serial(self,sensor_serial):
+        self.sensor_serial = sensor_serial
+
+class DeviceCatalog(db.Document):
+    #Catalog of supported sensors, updated from time to time
     devicetype = db.StringField()
     devicename = db.StringField()
     deviceid = db.AnythingField()
+    devicedesc = db.StringField()
 
+    def devicetype(self,sensortype):
+        device_types = ['environment','display']
+        if(str(devicetype).lower in device_types):
+            self.devicetype = devicetype
+        else:
+            abort(406)
+
+    def devicename(self,devicename):
+        self.devicename = devicename
     
+    def deviceid(self,deviceid):
+        self.deviceid = deviceid
+    
+    def devicedesc(self,devicedesc):
+        self.devicedesc = devicedesc
+
+class AttachedDevice(db.Document):
+    #Inventory of sensors attached to the rackbrain 
+    devicetype = db.StringField()
+    devicename = db.StringField()
+    deviceid = db.AnythingField()
+    devicedesc = db.StringField()
+    deviceserial = db.AnythingField()
+    
+    def deviceserial(self):
+        key_num = random.SystemRandom()
+        self.deviceserial = key_num.randint(0, sys.maxsize)
+        return self.deviceserial
+    
+    def devcietype(self,devicetype):
+        self.devicetype = devicetype
+
+    def devicename(self,devicename):
+        self.devicename = devicename
+    
+    def deviceid(self,deviceid):
+        self.deviceid = deviceid
+
+    def devicedesc(self,devicedesc):
+        self.devicedesc = devicedesc
 
 class RackBrainSys(db.Document):
-    rackbrainlocation = db.StringField()
+    rackid = db.AnythingField()
+    manufacture_date = db.AnythingField()
+    location = db.StringField()
+    setup_date = db.AnythingField()
+    version = db.StringField()
+    
+    def location(self,location):
+        self.location = location
+    
+    def version(self,version):
+        self.version = version
+        
+    def setup_date(self,date):
+        self.date = date
     
     
