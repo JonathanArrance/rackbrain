@@ -1,4 +1,4 @@
-# Rackbrain rack intellegence platform.
+# Rackbrain rack intellegence platform. - NOT COMPLETE
 Used to monitor the status of an AV or IT rack.
 
 ## Environment.
