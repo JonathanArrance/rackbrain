@@ -6,7 +6,6 @@ import random
 import datetime
 import sys
 
-print settings.MONGO_HOST
 def start_mongo():
     pass
 
@@ -30,76 +29,77 @@ def setup_mongo():
     version = 'alpha 1'
 
     if('RackBrainSys' not in collections):
-       print "Creating RackBrainSys table with default values."
-       #system level stuff
-       Sys = db.RackBrainSys.insert_many([{'rackid':rackid,
+        print "Creating RackBrainSys table with default values."
+        #system level stuff
+        Sys = db.RackBrainSys.insert({'rackid':rackid,
                                            'manufacture_date':now.isoformat(),
                                            'version':version,
                                            'location':None,
-                                           'setup_date':None}])
+                                           'setup_date':None})
     else:
-       print "RackBrainSys table exists."
+        print "RackBrainSys table exists."
 
     #build out the default accounts
     if('Account' not in collections):
-       print "Creating Account table with default values."
-       #password: rackbrain
-       Acc = db.Account.insert_many([{"username":"admin",
-                                              "password_hash":"$5$rounds=535000$o.iBk6PxET4Oo5WA$5EXk1LpZkN02LMob9iCBGKao8.kMIhmqOJhtK0mQHu4",
-                                              "userid":0001,
-                                              "role":"admin"
-                                              },
-                                              {"username":"backend",
-                                              "password_hash":"$5$rounds=535000$o.iBk6PxET4Oo5WA$5EXk1LpZkN02LMob9iCBGKao8.kMIhmqOJhtK0mQHu4",
-                                              "userid":0002,
-                                              "role":"service"},
-                                              {"username":"interface",
-                                              "password_hash":"$5$rounds=535000$o.iBk6PxET4Oo5WA$5EXk1LpZkN02LMob9iCBGKao8.kMIhmqOJhtK0mQHu4",
-                                              "userid":0003,
-                                              "role":"service"}
-                                              ])
+        print "Creating Account table with default values."
+        #password: rackbrain
+        accs = [{"username":"admin",
+                    "password_hash":"$5$rounds=535000$o.iBk6PxET4Oo5WA$5EXk1LpZkN02LMob9iCBGKao8.kMIhmqOJhtK0mQHu4",
+                    "userid":0001,
+                    "role":"admin"},
+                    {"username":"backend",
+                    "password_hash":"$5$rounds=535000$o.iBk6PxET4Oo5WA$5EXk1LpZkN02LMob9iCBGKao8.kMIhmqOJhtK0mQHu4",
+                    "userid":0002,
+                    "role":"service"},
+                    {"username":"interface",
+                    "password_hash":"$5$rounds=535000$o.iBk6PxET4Oo5WA$5EXk1LpZkN02LMob9iCBGKao8.kMIhmqOJhtK0mQHu4",
+                    "userid":0003,
+                    "role":"service"}
+                    ]
+        Acc = db.Account.insert(accs)
 
     else:
-       print "Account table exists."
+        print "Account table exists."
 
     if('AccountSpecs' not in collections):
-       print "Creating AccountSpecs table with default values."
-       Aspec = db.AccountSpecs.insert_many([{
-                                          "firstname":"admin",
-                                          "lastname":"none",
-                                          "email":"%s@rackbrainav.com"%(rackid),
-                                          "userid":0001
-                                          },
-                                          {
-                                          "firstname":"backend",
-                                          "lastname":"none",
-                                          "email":"%s@rackbrainav.com"%(rackid),
-                                          "userid":0002
-                                          },
-                                          {
-                                          "firstname":"interface",
-                                          "lastname":"none",
-                                          "email":"%s@rackbrainav.com"%(rackid),
-                                          "userid":0003
-                                          }
-                                      ])
+        print "Creating AccountSpecs table with default values."
+        specs = [{
+                        "firstname":"admin",
+                        "lastname":"none",
+                        "email":"%s@rackbrainav.com"%(rackid),
+                        "userid":0001
+                        },
+                        {
+                        "firstname":"backend",
+                        "lastname":"none",
+                        "email":"%s@rackbrainav.com"%(rackid),
+                        "userid":0002
+                        },
+                        {
+                        "firstname":"interface",
+                        "lastname":"none",
+                        "email":"%s@rackbrainav.com"%(rackid),
+                        "userid":0003
+                        }
+                    ]
+        Aspec = db.AccountSpecs.insert(specs)
 
     else:
        print "AccountSpecs table exists."
 
     if('Sensor' not in collections):
        print "Creating a Sensor inventory table"
-       Sensor = db.Sensor.insert_many([{"sensortype":None,
+       Sensor = db.Sensor.insert({"sensortype":None,
                                         "sensorname":None,
                                         "sensorid":None,
-                                        "sensordesc":None}])
+                                        "sensordesc":None})
     else:
        print "Sensor inventory table already exists"
 
     if('SensorCatalog' not in collections):
        print "Creating SensorCatalog table with default values."
        #build out the default sensors
-       Sensor = db.SensorCatalog.insert_many([{
+       sensorcatalog = [{
                                        "sensortype":"temp",
                                        "sensorname":"Temp and Humidity Sensor",
                                        "sensorid":"DHT11-001",
@@ -128,34 +128,36 @@ def setup_mongo():
                                        "sensorname":"PressureSensor",
                                        "sensorid":"Pressure",
                                        "sensordesc": "General purpose pressure sensor."
-                                       }])
+                                       }]
+       Sensor = db.SensorCatalog.insert(sensorcatalog)
     else:
        print "SensorCatalog table exists."
 
     if('Device' not in collections):
        print "Creating a Device inventory table"
-       Device = db.Device.insert_many([{"devicetype":None,
+       Device = db.Device.insert({"devicetype":None,
                                         "devicename":None,
                                         "deviceid":None,
-                                        "devicedesc":None}])
+                                        "devicedesc":None})
     else:
        print "Device inventory table already exists"
 
     if('DeviceCatalog' not in collections):
        print "Creating DeviceCatalog table with default values."
        #build out the default sensors
-       Device = db.DeviceCatalog.insert_many([{
-                                       "devicetype":"environment",
-                                       "devicename":"fan",
-                                       "deviceid":"FAN-001",
-                                       "devicedesc": "General purpose cooling fan."
-                                       },
-                                       {
-                                       "devicetype":"display",
-                                       "devicename":"small LCD",
-                                       "deviceid":"LCD-001",
-                                       "devicedesc": "General purpose LCD."
-                                       }])
+       devicecatalog = [{
+                                "devicetype":"environment",
+                                "devicename":"fan",
+                                "deviceid":"FAN-001",
+                                "devicedesc": "General purpose cooling fan."
+                                },
+                                {
+                                "devicetype":"display",
+                                "devicename":"small LCD",
+                                "deviceid":"LCD-001",
+                                "devicedesc": "General purpose LCD."
+                                }]
+       Device = db.DeviceCatalog.insert(devicecatalog)
     else:
        print "DeviceCatalog table exists."
 

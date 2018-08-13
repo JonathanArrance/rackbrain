@@ -8,6 +8,7 @@ RUN mkdir -p $INSTALL_PATH
 
 WORKDIR $INSTALL_PATH
 
+RUN pip install --upgrade pip
 ADD requirements.txt /
 RUN pip install -r /requirements.txt
 

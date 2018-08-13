@@ -138,5 +138,5 @@ def remove_device(device_id):
     return api_lib.remove_device(device_id)
 
 if __name__ == '__main__':
-    #mongo_lib.app.run(host='0.0.0.0',port=8443, debug=True,ssl_context='adhoc')
-    mongo_lib.app.run(host='0.0.0.0',port=8443, debug=True)
+    mongo_lib.app.run(host='0.0.0.0',port=8443, debug=True,ssl_context='adhoc')
+    #mongo_lib.app.run(host='0.0.0.0',port=8443, debug=True)
