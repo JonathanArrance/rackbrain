@@ -8,6 +8,27 @@ RUN mkdir -p $INSTALL_PATH
 
 WORKDIR $INSTALL_PATH
 
+ENV PACKAGES="\
+  dumb-init \
+  musl \
+  libc6-compat \
+  linux-headers \
+  build-base \
+  bash \
+  git \
+  ca-certificates \
+  python2 \
+  python2-dev \
+  py-setuptools \
+  g++ \
+  gcc \
+  libffi \
+  libffi-dev \
+  openssl \
+  openssl-dev \
+"
+RUN apk add --no-cache $PACKAGES
+
 RUN pip install --upgrade pip
 ADD requirements.txt /
 RUN pip install -r /requirements.txt

@@ -6,13 +6,7 @@ import random
 import api_lib
 import mongo_lib
 
-from flask import  abort, request, jsonify, g, url_for
-#from mongo_lib import Account as Account
-#from mongo_lib import AccountSpecs as AccountSpecs
-#from mongo_lib import Property as Property
-#from mongo_lib import PropertySpecs as PropertySpecs
-#from mongo_lib import UnitSpecs as UnitSpecs
-#from mongo_lib import Rents as Rents
+import util
 
 @mongo_lib.auth.verify_password
 def verify_password(username_or_token, password):

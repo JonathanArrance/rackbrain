@@ -33,6 +33,8 @@ app.config['MONGO_HOST'] = settings.MONGO_HOST
 app.config['MONGO_PORT'] = settings.MONGO_PORT
 app.config['MONGO_DBNAME'] = settings.MONGO_DBNAME
 app.config['API_VER'] = settings.API_VERSION
+app.config['MONGO_URI'] = settings.MONGO_URI
+
 
 db = MongoAlchemy(app)
 auth = HTTPBasicAuth()
