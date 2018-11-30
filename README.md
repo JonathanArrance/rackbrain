@@ -36,12 +36,12 @@ NOTE: This software is not tested on this platform, but should work.
 
 # API Examples
 Create new user account
-curl -i -X POST -H "Content-Type: application/json" -d '{"username":"paul","password":"python","role":"admin"}' -k https://192.168.10.9:8443/api/users
+curl -i -X POST -H "Content-Type: application/json" -d '{"username":"paul","password":"python","role":"admin"}' -k https://192.168.10.9:8443/api/1.0/users
 
 Get a new token
-curl -u paul:python -i -k -X GET https://192.168.10.9:8443/api/token
+curl -u paul:python -i -k -X GET https://192.168.10.9:8443/api/1.0/token
 
 Use the token to talk to endpoint
-curl -u eyJhbGciOiJIUzI1NiIsImV4cCI6MTUxOTE0NzExNSwiaWF0IjoxNTE5MTQzNTE1fQ.eyJ1c2VyaWQiOjgzNTQ1NjMyODExNzAxMzgwMzV9.BX0xOSSDLmFiBzANy5pMCYfxkB4edgao3O4IK8akO4c:x -i -k -X GET https://192.168.10.9:8443/api/users
+curl -u eyJhbGciOiJIUzI1NiIsImV4cCI6MTUxOTE0NzExNSwiaWF0IjoxNTE5MTQzNTE1fQ.eyJ1c2VyaWQiOjgzNTQ1NjMyODExNzAxMzgwMzV9.BX0xOSSDLmFiBzANy5pMCYfxkB4edgao3O4IK8akO4c:x -i -k -X GET https://192.168.10.9:8443/api/1.0/users
 
 # TODO
