@@ -24,9 +24,6 @@ RUN mkdir -p \
 COPY ./docker-entrypoint.sh /
 RUN ["chmod", "+x", "/docker-entrypoint.sh"]
 
-# Define mountable directories
-#VOLUME /data/db /data/configdb
-
 # Define working directory
 WORKDIR /data
 
@@ -36,7 +33,4 @@ WORKDIR /data
 EXPOSE 27017
 EXPOSE 28017
 
-#ENTRYPOINT ["/sbin/tini", "--"]
 ENTRYPOINT ["/usr/bin/mongod"]
-#CMD ["/docker-entrypoint.sh"]
-#CMD ["mongod"] 
