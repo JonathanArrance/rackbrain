@@ -4,7 +4,7 @@ FROM alpine-python
 
 MAINTAINER Jonathan Arrance <jonathan.arrance@gmail.com>
 
-ENV INSTALL_PATH /opt/backend
+ENV INSTALL_PATH /opt/backendapi
 RUN mkdir -p $INSTALL_PATH
 WORKDIR $INSTALL_PATH
 
@@ -12,14 +12,12 @@ ADD requirements.txt /
 RUN pip install -r /requirements.txt
 
 # Copy the current directory contents into the container at /app
-ADD device.py $INSTALL_PATH
 ADD settings.py $INSTALL_PATH
-ADD screen.py $INSTALL_PATH
-ADD sensor.py $INSTALL_PATH
 ADD util.py $INSTALL_PATH
 ADD backendAPI.py $INSTALL_PATH
+ADD mongo_lib.py $INSTALL_PATH
 
-# Make port 8443 available to the world outside this container
+# Make port 9443 available to the world outside this container
 EXPOSE 9443
 
 # Define environment variable

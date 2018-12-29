@@ -1,1 +1,5 @@
-#add all of the backend settingis in here
+#backend username
+BACKEND_USER='backend'
+#Password
+BACKEND_PASS='rackbrain'
+
