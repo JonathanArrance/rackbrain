@@ -2,3 +2,37 @@ version: "3"
 services:
 
   rpi-mongo:
+    image: rpi-mongo
+    ports:
+        - "27017"
+        - "28017"
+    volumes:
+        - mongodata:/data
+    networks:
+        - rack_nw
+    deploy:
+        replicas: 1
+        restart_policy:
+            condition: unless-stopped
+  
+  rack-api:
+    image: rack-api
+    ports:
+        - "8443:8443"
+    networks:
+        - rack_nw
+    deploy:
+        replicas: 1
+        restart_policy:
+            condition: unless-stopped
+  
+  processor:
+    image: processor
+    ports:
+        - "9443:9443"
+    networks:
+        - rack_nw
+    deploy:
+        replicas: 1
+        restart_policy:
+            condition: unless-stopped
