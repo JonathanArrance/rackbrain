@@ -160,6 +160,22 @@ def setup_mongo():
        Device = db.DeviceCatalog.insert(devicecatalog)
     else:
        print "DeviceCatalog table exists."
+    
+    if('Reading' not in collections):
+       print "Creating Reading table with default values."
+       #build out the default sensors
+       reading = [{
+                                "readingid":None,
+                                "readingtime":None,
+                                "reading":None,
+                                "readingtype":None,
+                                "readingunit":None,
+                                "sensorserial":None,
+                                }]
+
+       Reading = db.Reading.insert(reading)
+    else:
+       print "DeviceCatalog table exists."
 
 if __name__ == '__main__':
     #if (check_mongo() == 'down'):

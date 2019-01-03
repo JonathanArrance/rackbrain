@@ -1,6 +1,6 @@
 FROM base-python2.7
 
-MAINTAINER Jonathan Arrance <speed3nc@gmail.com>
+MAINTAINER Jonathan Arrance <jonathan.arrance@gmail.com>
 
 ENV INSTALL_PATH /opt/API
 

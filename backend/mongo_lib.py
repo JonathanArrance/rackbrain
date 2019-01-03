@@ -1,7 +1,7 @@
 #!/bin/python
 import random
 import sys
-import datetime
+import time
 #import tools_lib as tools
 import re
 
@@ -78,123 +78,34 @@ class Account(db.Document):
         user = mongo.db.Account.find_one({'userid':data['userid']})
         return user['userid']
 
-class AccountSpecs(db.Document):
-    userid = db.AnythingField()
-    firstname = db.StringField()
-    lastname = db.StringField()
-    email = db.StringField()
-
-class SensorCatalog(db.Document):
-    #Catalog of supported sensors, updated from time to time
-    sensortype = db.StringField()
-    sensorname = db.StringField()
-    sensorid = db.AnythingField()
-    sensordesc = db.StringField()
-
-    def sensortype(self,sensortype):
-        sensor_types = ['temp','photo','power','pressure']
-        if(str(sensortype).lower in sensor_types):
-            self.sensortype = sensortype
-
-class SensorInventory(db.Document):
-    #Inventory of sensors attached to the rackbrain 
-    sensortype = db.StringField()
-    sensorname = db.StringField()
-    sensorid = db.AnythingField()
-    sensordesc = db.StringField()
-    sensorserial = db.AnythingField()
-    
-    def sensorserial(self):
-        key_num = random.SystemRandom()
-        self.sensorserial = key_num.randint(0, sys.maxsize)
-        return self.sensorserial
-    
-    def sensortype(self,sensortype):
-        self.sensortype = stype
-
-    def sensorname(self,sensorname):
-        self.sensorname = sensorname
-    
-    def sensorid(self,sensorid):
-        self.sensorid = sensorid
-
-    def sensordesc(self,sensordesc):
-        self.sensordesc = sensordesc
-
 class Reading(db.Document):
+    reading = db.StringField()
     readingid = db.AnythingField()
     readingtime = db.AnythingField()
-    reading = db.StringField()
     readingtype = db.StringField()
-    sensorserial = db.AnythingField()
-    
+    readingunit = db.StringField()
+    sensor_serial = db.AnythingField()
+
     def readingid(self):
         key_num = random.SystemRandom()
         self.readingid = key_num.randint(0, sys.maxsize)
         return self.readingid
 
-    def readingtime(self,readingdate):
-        self.readingtime = datetime.datetime.now().timestamp()
-
-    def reading(self, reading):
-        self.reading = reading
+    def readingtime(self):
+        self.readingtime = time.time()
+        return self.readingtime
 
     def readingtype(self,readingtype):
         values = ['temp','humidity','power','pressure']
-        if readingtype not in values:
+        if str(readingtype).lower() not in values:
             abort(404)
         self.readingtype = readingtype
 
+    def readingunit(self,readingunit):
+        self.readingunit = readingunit
+
     def sensor_serial(self,sensor_serial):
         self.sensor_serial = sensor_serial
-
-class DeviceCatalog(db.Document):
-    #Catalog of supported sensors, updated from time to time
-    devicetype = db.StringField()
-    devicename = db.StringField()
-    deviceid = db.AnythingField()
-    devicedesc = db.StringField()
-
-    def devicetype(self,sensortype):
-        device_types = ['environment','display']
-        if(str(devicetype).lower in device_types):
-            self.devicetype = devicetype
-        else:
-            abort(406)
-
-    def devicename(self,devicename):
-        self.devicename = devicename
-    
-    def deviceid(self,deviceid):
-        self.deviceid = deviceid
-    
-    def devicedesc(self,devicedesc):
-        self.devicedesc = devicedesc
-
-class AttachedDevice(db.Document):
-    #Inventory of sensors attached to the rackbrain 
-    devicetype = db.StringField()
-    devicename = db.StringField()
-    deviceid = db.AnythingField()
-    devicedesc = db.StringField()
-    deviceserial = db.AnythingField()
-    
-    def deviceserial(self):
-        key_num = random.SystemRandom()
-        self.deviceserial = key_num.randint(0, sys.maxsize)
-        return self.deviceserial
-    
-    def devcietype(self,devicetype):
-        self.devicetype = devicetype
-
-    def devicename(self,devicename):
-        self.devicename = devicename
-    
-    def deviceid(self,deviceid):
-        self.deviceid = deviceid
-
-    def devicedesc(self,devicedesc):
-        self.devicedesc = devicedesc
 
 class RackBrainSys(db.Document):
     rackid = db.AnythingField()
@@ -202,14 +113,12 @@ class RackBrainSys(db.Document):
     location = db.StringField()
     setup_date = db.AnythingField()
     version = db.StringField()
-    
+
     def location(self,location):
         self.location = location
-    
+
     def version(self,version):
         self.version = version
-        
+
     def setup_date(self,date):
         self.date = date
-    
-    

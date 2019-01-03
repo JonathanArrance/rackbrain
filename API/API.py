@@ -98,27 +98,7 @@ def add_sensor(sensor_id):
 def remove_sensor(sensor_id):
     return api_lib.remove_sensor(sensor_id)
 
-####Readings##########
-@mongo_lib.app.route('/api/'+api+'/readings', methods=['GET'])
-@mongo_lib.auth.login_required
-def get_readings():
-    #times should be a unix timestamp since it accounts for date and time
-    start = request.json.get('starttime')
-    end = request.json.get('endtime')
-    sensorid = request.json.get('sensorid')
-    params = {'start':start,'end':end,'sensorid':sensorid}
-    return api_lib.get_readings(params) 
 
-@mongo_lib.app.route('/api/'+api+'/readings', methods=['POST'])
-@mongo_lib.auth.login_required
-def add_reading():
-    #only the "backend" user can add readings, all other will be rejected
-    #times should be a unix timestamp since it accounts for date and time
-    reading_type = request.json.get('reading_type')
-    reading = request.json.get('reading')
-    sensorid = request.json.get('sensorid')
-    params = {'reading_type':reading_type,'reading':reading,'sensorid':sensorid}
-    return api_lib.add_reading(params)
 
 ####Devices#########
 @mongo_lib.app.route('/api/'+api+'/device', methods=['GET'])

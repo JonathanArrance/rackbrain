@@ -20,7 +20,7 @@ curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
 apt-key fingerprint 0EBFCD88
 echo "deb [arch=armhf] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list
 apt-get update
-apt-get install docker-ce=18.03.0.ce
+apt-get install docker-ce=18.06.0.ce
 
 echo 'Add pi user to Docker'
 usermod -a -G docker $USER
