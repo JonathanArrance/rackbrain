@@ -31,20 +31,21 @@ def get_auth_token():
     token = g.user.generate_auth_token(3600)
     return jsonify({'token': token.decode('ascii'), 'duration': 3600})
 
+@mongo_lib.app.route('/api/'+api+'/alive')
+def get_alive():
+    return jsonify({'data': 'Backend api is alive.'})
+
 #curl -u token:x -i -k -X POST http://192.168.1.56:9443/api/1.0/reading
 #-d '{'reading':'34','reading_type':'temp','sensor_serial':'434343434','reading_unit':'kelvin'}'
 @mongo_lib.app.route('/api/'+api+'/reading', methods=['POST'])
-@mongo_lib.auth.login_required
+#@mongo_lib.auth.login_required
 def add_reading():
     #only the "backend" user can add readings, all other will be rejected
     #times should be a unix timestamp since it accounts for date and time
-    #reading_type = request.json.get('reading_type')
-    #reading = request.json.get('reading')
-    #sensor_serial = request.json.get('sensor_serial')
-    reading_type = 'temp'
-    reading = '48'
-    sensor_serial = '4455'
-    reading_unit = 'kelvin'
+    reading_type = request.json.get('reading_type')
+    reading = request.json.get('reading')
+    sensor_serial = request.json.get('sensor_serial')
+    reading_unit = request.json.get('reading_unit')
     params = {'reading_type':reading_type,'reading':reading,'sensor_serial':sensor_serial,'reading_unit':reading_unit}
     return api_lib.add_reading(params)
 

@@ -27,14 +27,12 @@ def add_reading(params):
     #TODO: Add sensor validity check
     # mongo_lib.check this sensor if it is in system.
     #if not abort - sensor not attached error
-
-    reading = Reading(reading=params['reading'])
-    rid = reading.readingid()
-    rtime = reading.readingtime()
-    reading.readingtype(params['reading_type'])
-    reading.sensor_serial(params['sensor_serial'])
-    reading.readingunit(params['reading_unit'])
-    reading.save()
+    
+    print params
+    #reading = Reading(reading=params['reading'],reading_type=params['reading_type'],sensor_serial=params['sensor_serial'],reading_unit=params['reading_unit'])
+    #rid = reading.readingid()
+    #rtime = reading.readingtime()
+    #reading.save()
 
     return (jsonify({'id': rid,'time':rtime}), 201)
 
