@@ -10,7 +10,13 @@ flask_httpauth==3.2.3
 IPy==0.75
 pymongo==2.8.1
 mongoalchemy==0.19
-flask==0.10.1
-itsdangerous==0.24
-Jinja2==2.7.3
+flask==1.0.2
+Jinja2==2.10
+click==7.0
+MarkupSafe==1.1.0
+Werkzeug==0.14.1
+itsdangerous==1.1.0
 passlib==1.7.1
+#flask==0.10.1
+#itsdangerous==0.24
+#Jinja2==2.7.3

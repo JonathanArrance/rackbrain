@@ -12,7 +12,7 @@ print json.loads(r.text)
 
 #send a reading
 #curl -i -X POST -H "Content-Type: application/json" -d '{"username":"paul","password":"python"}' -k https://192.168.10.9:8443/api/users
-headers = {"content-type":"application/json;charset=UTF-8","X-Auth-Token":token['token']}
+headers = {"content-type":"application/json;charset=UTF-8","X-Auth-Token":str(token['token'])}
 
 print "Sending a new reading to the backend API"
 data = "{'reading':'65','reading_type':'temp','sensor_serial':'67676767','reading_unit':'celcious'}"

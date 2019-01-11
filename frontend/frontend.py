@@ -42,10 +42,12 @@ def get_alive():
 ###User Crud####
 @mongo_lib.app.route('/api/'+api+'/users', methods=['POST'])
 def new_user():
-    username = request.json.get('username')
-    password = request.json.get('password')
-    role = request.json.get('role')
-    params = {'username':username,'password':password,'role':role}
+    req_data = request.get_json()
+    params = {'username':req_data['username'],'password':req_data['password'],'role':req_data['role']}
+    #username = request.json.get('username')
+    #password = request.json.get('password')
+    #role = request.json.get('role')
+    #params = {'username':username,'password':password,'role':role}
     return api_lib.create_user(params)
 
 @mongo_lib.app.route('/api/'+api+'/users/<int:user_id>',methods=['GET'])

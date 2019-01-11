@@ -165,12 +165,12 @@ def setup_mongo():
        print "Creating Reading table with default values."
        #build out the default sensors
        reading = [{
-                                "readingid":None,
-                                "readingtime":None,
+                                "reading_id":None,
+                                "reading_time":None,
                                 "reading":None,
-                                "readingtype":None,
-                                "readingunit":None,
-                                "sensorserial":None,
+                                "reading_type":None,
+                                "reading_unit":None,
+                                "sensor_serial":None,
                                 }]
 
        Reading = db.Reading.insert(reading)
