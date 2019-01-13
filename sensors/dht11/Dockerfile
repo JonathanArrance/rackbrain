@@ -13,9 +13,4 @@ RUN pip install -r /requirements.txt
 # Copy the current directory contents into the container at /app
 ADD sensor.py $INSTALL_PATH
 ADD settings.py $INSTALL_PATH
-
-# Define environment variable
-ENV NAME dht11
-
-# Run app.py when the container launches
-CMD ["python", "sensor.py"]
+ADD start_dht11.sh $INSTALL_PATHENTRYPOINT ['python','sensor.py']
