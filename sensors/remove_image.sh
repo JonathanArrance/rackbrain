@@ -1,2 +1,2 @@
 #!/bin/bash -x
-docekr rmi backend-api
+doceker rmi base-sensor 

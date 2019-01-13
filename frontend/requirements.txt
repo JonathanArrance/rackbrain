@@ -1,7 +1,6 @@
 requests==2.18.1
 pyOpenSSL==18.0.0
 gunicorn==19.7.1
-passlib==1.7.1
 argon2_cffi==16.3.0
 oauth2==1.9.0.post1
 flask_mongoalchemy==0.7.2

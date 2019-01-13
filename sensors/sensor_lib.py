@@ -15,7 +15,7 @@ LEVELS = {
           'critical': logging.CRITICAL
           }
 
-def _get_backend_token():
+def get_backend_token():
         """
         Desc: Get the token from the backend API service
         Input: None
@@ -32,7 +32,7 @@ def _get_backend_token():
             raise Exception('Could not authenticate DHT 11 to backend API')
         return json.loads(r.text)
 
-def _send_reading(input_dict):
+def send_reading(input_dict):
          """
         Desc: Get the token from the backend API service
         Input: input_dict - reading - the measured reding from the sensor

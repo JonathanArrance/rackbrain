@@ -1,2 +1,2 @@
 #!/bin/bash -x
-docker build -t backend-api .
+docker build -t base-sensor .

@@ -1,2 +1,2 @@
 #!/bin/bash
-docker run -e MONGO_HOST=mongo345 --network rack_nw --name backend-api backend-api
+docker run --network rack_nw --name base-sensor base-sensor 
