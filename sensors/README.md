@@ -30,6 +30,9 @@ Input - dictionary
 If the following is used in your Dockerfile then the custom sensor code will be able to use the sensor lib.
 
 FROM base-sensor
+
 ENV INSTALLPATH /opt/sensor
+
 WORKINGDIR $INSTALLPATH
+
 COPY mysensor.py $INSTALLPATH
