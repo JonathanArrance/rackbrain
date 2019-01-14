@@ -2,19 +2,26 @@
 
 The backend API container is used to handle any non-customer facing operations. These operations can include posting readings to the database, and pulling data for system output on the display. 
 
-# API endpoint
+## API endpoint
 
-/api/1.0/token
--- Function - POST
--- Payload {'username':'myusername','password':'mypass'}
+/api/1.0/token </br>
+-- Function - POST </br>
+-- Payload {'username':'myusername','password':'mypass'} </br>
+-- Output {'duration':'3600','token':'TOKEN'} </br>
 
-/api/1.0/reading - input readings into the backend DB
--- Function - POST
--- Payload {reading_type,reading_unit,sensor_serial}
+/api/1.0/reading - input readings into the backend DB </br>
+-- Function - POST </br>
+-- Payload {'reading':'46','reading_type':'temp','reading_unit':'celcious','sensor_serial':'990088'} </br>
+-- Output 'OK' </br>
 
-## Ex
+### Code Ex
 
-# CURL
+
+
+
+### CURL
+
+curl -u backend:rackbrain -i -k http://backend-api:9443/api/1.0/token
 
 
 
