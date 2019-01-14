@@ -1,12 +1,22 @@
-# The backend API container is used to post readings to the DB from the various sensors connected to the device. 
+# Backend API
 
-# Development
+The backend API container is used to handle any non-customer facing operations. These operations can include posting readings to the database, and pulling data for system output on the display. 
 
-## Build
+## Development
 
-## Run
+### Build Run Remove
 
-## Remove
+make.sh - build the container
+
+run_container.sh - bring up a new backend-api container
+
+stop_container.sh - stop the container and remove it
+
+remove_image.sh - remove the Docker container image from the local image library
+
+### Environment
+
+See base 
 
 # API endpoint
 
