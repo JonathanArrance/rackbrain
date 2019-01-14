@@ -15,7 +15,7 @@ The backend API container is used to handle any non-customer facing operations. 
 -- Output 'OK' </br>
 
 ### Code Ex
-
+```python
 r = requests.get('http://192.168.1.56:9443/api/1.0/token', auth=requests.auth.HTTPBasicAuth('backend', 'rackbrain'))
 out = r.raise_for_status()
 if(out != None):
@@ -24,13 +24,11 @@ if(out != None):
 print 'Get the backend token'
 token = json.loads(r.text)
 print json.loads(r.text)
-
+```
 
 ### CURL
 
 curl -u backend:rackbrain -i -k http://backend-api:9443/api/1.0/token
-
-
 
 ## Development
 
