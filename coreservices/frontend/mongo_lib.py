@@ -2,7 +2,6 @@
 import random
 import sys
 import datetime
-#import tools_lib as tools
 import re
 
 #settings file
@@ -17,17 +16,9 @@ from flask_pymongo import PyMongo
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = settings.SECRET_KEY
-#app.config['MONGOALCHEMY_DATABASE'] = 'tatter'
 app.config['MONGOALCHEMY_DATABASE'] = settings.MONGO_DBNAME
-#app.config['MONGOALCHEMY_SERVER'] = '192.168.10.34'
 app.config['MONGOALCHEMY_SERVER'] = settings.MONGO_HOST
-#app.config['MONGOALCHEMY_PORT'] = 27017
 app.config['MONGOALCHEMY_PORT'] = settings.MONGO_PORT
-
-#app.config['MONGO_HOST'] = '192.168.10.34'
-#app.config['MONGO_PORT'] = 27017
-#app.config['MONGO_DBNAME'] = 'tatter'
-#app.config['API_VER'] = '1.0'
 
 app.config['MONGO_HOST'] = settings.MONGO_HOST
 app.config['MONGO_PORT'] = settings.MONGO_PORT
@@ -98,28 +89,31 @@ class SensorCatalog(db.Document):
 
 class SensorInventory(db.Document):
     #Inventory of sensors attached to the rackbrain 
-    sensortype = db.StringField()
-    sensorname = db.StringField()
-    sensorid = db.AnythingField()
-    sensordesc = db.StringField()
-    sensorserial = db.AnythingField()
+    sensor_type = db.StringField()
+    sensor_name = db.StringField()
+    #sensorid = db.AnythingField()
+    sensor_desc = db.StringField()
+    sensor_serial = db.AnythingField()
     
-    def sensorserial(self):
-        key_num = random.SystemRandom()
-        self.sensorserial = key_num.randint(0, sys.maxsize)
-        return self.sensorserial
+    #def sensorserial(self):
+    #    key_num = random.SystemRandom()
+    #    self.sensorserial = key_num.randint(0, sys.maxsize)
+    #    return self.sensorserial
     
-    def sensortype(self,sensortype):
-        self.sensortype = stype
+    def sensor_serial(self,sensor_serial):
+        self.sensor_serial = sensor_serial
 
-    def sensorname(self,sensorname):
-        self.sensorname = sensorname
-    
-    def sensorid(self,sensorid):
-        self.sensorid = sensorid
+    def sensor_type(self,sensor_type):
+        self.sensortype = sensor_type
 
-    def sensordesc(self,sensordesc):
-        self.sensordesc = sensordesc
+    def sensor_name(self,sensor_name):
+        self.sensor_name = sensor_name
+    
+    #def sensorid(self,sensorid):
+    #    self.sensorid = sensorid
+
+    def sensor_desc(self,sensor_desc):
+        self.sensor_desc = sensor_desc
 
 class Reading(db.Document):
     readingid = db.AnythingField()

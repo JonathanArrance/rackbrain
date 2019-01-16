@@ -2,7 +2,6 @@
 import random
 import sys
 import time
-#import tools_lib as tools
 import re
 
 #settings file
