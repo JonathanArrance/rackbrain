@@ -6,17 +6,17 @@ import re
 
 def add_reading(params):
     """
-    Add a reading to the database from a sensor. Sensor must be attached and valid.
-    input: Params dict - reading - the measured reding from the sensor
+    Desc: Add a reading to the database from a sensor. Sensor must be attached and valid.
+    Input: Params dict - reading - the measured reding from the sensor
                                  - reading_type - the unit the reading is measured in - ['temp','humidity','power','pressure'].
                                  - reading_unit - the units the reading is measured in
                                  - sensor_serial - the unique serial number for the sensor
-    output: 201 on successful add
+    Output: 201 on successful add
                 out_dict - id - unique id of reading
                              - time - time the reading was recorded
-    error: 400 no user found
+    Error: 400 no user found
               409 duplicate user
-   note: rid - generated unique
+    Note: rid - generated unique
             rtime - generated timestamp
     """
     #{'reading_type':reading_type,'reading':reading,'sensor_serial:sensorserial}
@@ -38,6 +38,28 @@ def add_reading(params):
     reading.save()
 
     return (jsonify({'id': rid,'time':rtime}), 201)
+
+def get_sensor(serial)
+    """
+    Desc: Get the sensor based on serial
+    Input: serial
+    Output: out_dict  - sensor_type
+                              - sensor_name
+                              - sensor_serial
+                              - sensor_desc
+    Error: 400 - the serial is not the correct format(int) or was not passed in
+    Note: rid - generated unique
+            rtime - generated timestamp
+    """
+    if(serial is None):
+        abort(400)
+    if(type(serial) in not int):
+        abort(400)
+
+    if .query.filter_by(userid=userid).first() is None:
+        abort(400)   # no user found
+
+     user = Account.query.filter_by(userid=userid).first()
 
 '''
 def get_status(userid):

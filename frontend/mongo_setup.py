@@ -89,10 +89,10 @@ def setup_mongo():
 
     if('Sensor' not in collections):
        print "Creating a Sensor inventory table"
-       Sensor = db.Sensor.insert({"sensortype":None,
-                                        "sensorname":None,
-                                        "sensorid":None,
-                                        "sensordesc":None})
+       Sensor = db.Sensor.insert({"sensor_type":None,
+                                        "sensor_name":None,
+                                        "sensor_serial":None,
+                                        "sensor_desc":None})
     else:
        print "Sensor inventory table already exists"
 
@@ -100,40 +100,41 @@ def setup_mongo():
        print "Creating SensorCatalog table with default values."
        #build out the default sensors
        sensorcatalog = [{
-                                       "sensortype":"temp",
-                                       "sensorname":"Temp and Humidity Sensor",
-                                       "sensorid":"DHT11-001",
-                                       "sensordesc": "General purpose temperature and humidity sensor."
+                                       "sensor_type":"temp",
+                                       "sensor_name":"Temp and Humidity Sensor",
+                                       "sensor_serial":"DHT11-001",
+                                       "sensor_desc": "General purpose temperature and humidity sensor."
                                        },
                                        {
-                                       "sensortype":"temp",
-                                       "sensorname":"Advanced Temp and Humidity Sensor",
-                                       "sensorid":"DHT22-001",
-                                       "sensordesc": "Highly sensative temperature and humidity sensor."
+                                       "sensor_type":"temp",
+                                       "sensor_name":"Advanced Temp and Humidity Sensor",
+                                       "sensor_serial":"DHT22-001",
+                                       "sensor_desc": "Highly sensative temperature and humidity sensor."
                                        },
                                        {
-                                       "sensortype":"power",
-                                       "sensorname":"Power",
-                                       "sensorid":"Power",
-                                       "sensordesc": "General purpose power sensor."
+                                       "sensor_type":"power",
+                                       "sensor_name":"Power",
+                                       "sensor_serial":"Power",
+                                       "sensor_desc": "General purpose power sensor."
                                        },
                                        {
-                                       "sensortype":"photo",
-                                       "sensorname":"PhotoSensor",
-                                       "sensorid":"Photo",
-                                       "sensordesc": "General purpose photo sensor."   
+                                       "sensor_type":"photo",
+                                       "sensor_name":"PhotoSensor",
+                                       "sensor_serial":"Photo",
+                                       "sensor_desc": "General purpose photo sensor."   
                                        },
                                        {
-                                       "sensortype":"pressure",
-                                       "sensorname":"PressureSensor",
-                                       "sensorid":"Pressure",
-                                       "sensordesc": "General purpose pressure sensor."
+                                       "sensor_type":"pressure",
+                                       "sensor_name":"PressureSensor",
+                                       "sensor_serial":"Pressure",
+                                       "sensor_desc": "General purpose pressure sensor."
                                        }]
        Sensor = db.SensorCatalog.insert(sensorcatalog)
     else:
        print "SensorCatalog table exists."
 
     if('Device' not in collections):
+       # Devices are things like fans and oled displays
        print "Creating a Device inventory table"
        Device = db.Device.insert({"devicetype":None,
                                         "devicename":None,

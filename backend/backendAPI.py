@@ -50,6 +50,12 @@ def add_reading():
 
     return api_lib.add_reading(params)
 
+@mongo_lib.app.route('/api/'+api+'/sensor', methods=['GET'])
+@mongo_lib.auth.login_required
+def get_sensor():
+    req_data = request.get_json()
+    return api_lib.get_sensor(req_data['sensor_serial'])
+
 '''
 @mongo_lib.app.route('/api/'+api+'/readings', methods=['GET'])
 @mongo_lib.auth.login_required
