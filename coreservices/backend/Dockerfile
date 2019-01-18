@@ -1,10 +1,9 @@
 # Use the python alpine image with python
 #need to get this working failing on adafruit stuff
-FROM base-python2.7
-
+FROM base-python27
 MAINTAINER Jonathan Arrance <jonathan.arrance@gmail.com>
 
-ENV INSTALL_PATH /opt/backendapi
+ENV INSTALL_PATH /opt/backend
 RUN mkdir -p $INSTALL_PATH
 WORKDIR $INSTALL_PATH
 

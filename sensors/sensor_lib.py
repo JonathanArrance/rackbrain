@@ -76,4 +76,4 @@ def generate_serial():
     Error: ERROR
     Note: None
     """
-    return int(random.random() * time.time())
+    

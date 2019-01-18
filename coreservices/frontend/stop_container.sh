@@ -1,2 +1,2 @@
-docker stop rack-api
-docker rm rack-api
+docker stop frontend-api
+docker rm frontend-api

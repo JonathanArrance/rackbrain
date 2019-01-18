@@ -1,1 +1,1 @@
-docker rmi rack-api
+docker rmi frontend-api

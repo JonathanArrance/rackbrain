@@ -1,8 +1,8 @@
-FROM base-python2.7
+FROM base-python27
 
 MAINTAINER Jonathan Arrance <jonathan.arrance@gmail.com>
 
-ENV INSTALL_PATH /opt/API
+ENV INSTALL_PATH /opt/frontend
 
 RUN mkdir -p $INSTALL_PATH
 
@@ -33,7 +33,7 @@ RUN pip install --upgrade pip
 ADD requirements.txt /
 RUN pip install -r /requirements.txt
 
-ADD API.py $INSTALL_PATH
+ADD frontend.py $INSTALL_PATH
 ADD mongo_lib.py $INSTALL_PATH
 ADD APIsettings.py $INSTALL_PATH
 ADD api_lib.py $INSTALL_PATH
@@ -43,5 +43,5 @@ ADD start_api.sh $INSTALL_PATH
 
 EXPOSE 8443
 
-#CMD ["python","API.py"]
-CMD ["./start_api.sh"]
+CMD ["python","frontend.py"]
+#CMD ["./start_api.sh"]

@@ -1,1 +1,1 @@
-docker build -t base-python2.7 .
+docker build -t base-python27 .

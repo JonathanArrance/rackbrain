@@ -1,5 +1,5 @@
 # Use the python alpine image with python
-FROM base-python2.7 
+FROM base-python27 
 
 MAINTAINER Jonathan Arrance <jonathan.arrance@gmail.com>
 
