@@ -60,20 +60,9 @@ def send_reading(input_dict):
 
 def get_sensor(serial):
     """
-    Desc: Create unique serial number for the sensor
+    Desc: Get the info for a sensor
     Input: None
     Output: Uniqe integer serial
     Error: ERROR
     Note: None
     """
-
-
-def generate_serial():
-    """
-    Desc: Create unique serial number for the sensor
-    Input: None
-    Output: Uniqe integer serial
-    Error: ERROR
-    Note: None
-    """
-    
