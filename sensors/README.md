@@ -8,7 +8,9 @@ Any new sensor builds should have the WORKINGDIR /opt/sensor set in their Docker
 
 ## Sensor Lib
 
-sensor_lib.py is used to communicate with the backend API. The backend API is a general purpose entry point into the database and any backend services needed for sensors, devices, functions, or displays.
+sensor_lib.py is used to communicate with the backend API. The backend API is a general purpose set of API entry points into the database and any backend services needed for sensors, devices, functions, or displays.
+
+NOTE: The backend API service is internal faceing to the Rackbrain system only.
 
 ### Functions
 ```
