@@ -1,11 +1,15 @@
-﻿# Rackbrain rack intellegence platform. - NOT COMPLETE
-IoT device used to monitor the status of AV or IT rack. Moreover this can be used as a framework for new IoT projects based on the RPI platform. The code can be adjusted to work on other platforms, and can have functionality easily added to the code by adding new containers.
+# Rackbrain rack intellegence platform. - NOT COMPLETE
+IoT device used to monitor the status of AV or IT rack. Moreover Rackbrain can be used as a framework for new IoT projects based on the RPI platform. The code can be adjusted to work on other platforms, and can have functionality easily added to the by adding new containers.
 
 ## Environment.
 1. OS - Raspian Stretch (9.4) - https://www.raspberrypi.org/downloads/raspbian/
 2. Docker - Docker version 18.06.0-ce
 3. Dev Language - Python 2.7.13 with support for 3.5
 4. Mongo - Mongo 3.0.4 (32bit mongo, 2gb Data limit)
+
+## Things Board
+MQTT integration with Things Board - Todo
+1. Integrate paho-mqtt python lib
 
 ## Hardware.
 Raspberry Pi 3 B or B+
@@ -20,13 +24,17 @@ NOTE: This software is not tested on this platform, but should work. Connnection
 # Development Environment
 
 ## Setup a dev environment.
-1. Install Raspian Stretch and enable SSH.
-2. Run ~/rackbrain/tools/setup_dev_env.sh.
+1. Install Raspian Stretch 9.4 and enable SSH.
+2. Run setup_dev_env.sh.
 3. Ensure all of the base images have been created and that the rpi-mongo container is running.
 
+```
+docker images
+```
+
 ## Run the Unittests
-1. cd unittests
-2. python 'unittestfile'
+1. cd into unit test directory
+2. python 'unit test file'
 
 ## Tools used
 1. Robot 3T - Mongo interface
