@@ -38,8 +38,8 @@ Output - 'OK'
 **get_sensor** - Get the info for a sensor
 Input - sensor_serial
 Output - dictionary
-   - sensor_name
-   - last_readings - dictionary of last 20 readings.
+   sensor_name
+   last_readings - dictionary of last 20 readings.
 ```
 ## Example
 
