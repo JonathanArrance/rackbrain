@@ -19,9 +19,7 @@ NOTE: The backend API service is internal faceing to the Rackbrain system only.
 Input - None
 
 Output - dictionary
-
     token - auth token
-
     duration - token duration - default 3600 seconds
 
 ```
@@ -29,22 +27,20 @@ Output - dictionary
 **send_reading** - send a reading to the backend API and the ultimately to to the backend database.
 
 Input - dictionary
-
     reading - the measured reding from the sensor
-
     reading_type - the unit the reading is measured in - ['temp','humidity','power','pressure'].
-
     reading_unit - the units the reading is measured in
-
     sensor_serial - the unique serial number for the sensor
 
-Output - dictionary
-
-    rid - reading ID
-
-    reading_time - time reading was recorded
+Output - 'OK'
 ```
-
+```
+**get_sensor** - Get the info for a sensor
+Input - sensor_serial
+Output - dictionary
+   - sensor_name
+   - last_readings - dictionary of last 20 readings.
+```
 ## Example
 
 If the following is used in your Dockerfile then the custom sensor code will be able to use the sensor lib.
