@@ -7,7 +7,7 @@ Rackbrain core services include the following
 4. Common libraries
 5. Base Python image
 
-## Files
+## Directories
 
 **frontend** - frontend api endpoints that are outward faceing for interfaces and customer automation.
 
