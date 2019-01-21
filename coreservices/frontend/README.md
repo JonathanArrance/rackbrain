@@ -1,34 +1,41 @@
-# Backend API
+# Fronend API
 
-The backend API container is used to handle any non-customer facing operations. These operations can include posting readings to the database, and pulling data for system output on the display. 
+The frontend API container is used to handle any customer, or outward facing operations. These operations can include adding a user or getting a set of readings.
 
 ## API endpoint
+Get a token
+```
+/api/1.0/token 
+-- Function - POST
+-- Payload {'username':'myusername','password':'mypass'}
+-- Output {'duration':'3600','token':'TOKEN'}
+```
 
-/api/1.0/token </br>
--- Function - POST </br>
--- Payload {'username':'myusername','password':'mypass'} </br>
--- Output {'duration':'3600','token':'TOKEN'} </br>
+Create a user
+```
+/api/1.0/users
+-- Function - POST
+-- Payload {'username':'jon','password':'mypass','role':'admin'}
+-- Output {'username':'jon','userid':'334455'}
+```
 
-/api/1.0/reading - input readings into the backend DB </br>
--- Function - POST </br>
--- Payload {'reading':'46','reading_type':'temp','reading_unit':'celcious','sensor_serial':'990088'} </br>
--- Output 'OK' </br>
+
 
 ### Code Ex
 ```python
-r = requests.get('http://192.168.1.56:9443/api/1.0/token', auth=requests.auth.HTTPBasicAuth('backend', 'rackbrain'))
+r = requests.get('http://192.168.1.56:8443/api/1.0/token', auth=requests.auth.HTTPBasicAuth('jon', 'password'))
 out = r.raise_for_status()
 if(out != None):
     raise Exception(out)
 
-print 'Get the backend token'
+print 'Get the login token'
 token = json.loads(r.text)
 print json.loads(r.text)
 ```
 
 ### CURL
 
-curl -u backend:rackbrain -i -k http://backend-api:9443/api/1.0/token
+curl -u jon:mypassword -i -k http://my_public_url:8443/api/1.0/token
 
 ## Development
 
@@ -36,7 +43,7 @@ curl -u backend:rackbrain -i -k http://backend-api:9443/api/1.0/token
 
 make.sh - build the container
 
-run_container.sh - bring up a new backend-api container
+run_container.sh - bring up a new frontend-api container
 
 stop_container.sh - stop the container and remove it
 
@@ -44,6 +51,6 @@ remove_image.sh - remove the Docker container image from the local image library
 
 ### Environment
 
-See base-python2.7 image and Dockerfile in the tools directory.
+See base-python27 image and Dockerfile in the tools directory.
 
 See the requierments.txt for included libraries and versions.
