@@ -65,7 +65,6 @@ docker volume create mongodata
 #start mongo on port 27017
 docker run --restart unless-stopped --name rpi-mongo --network rack_nw -d -p 28017:28017 -p 27017:27017 --mount source=mongodata,target=/data rpi-mongo
 
-
 #create system level accounts
 cp ~/coreservices/common/mongo_setup.py ~/rackbrain
 MONGO=`python ~/rackbrain/mongo_setup.py`
