@@ -1,6 +1,6 @@
-# Backend API
+# Controller API
 
-The backend API container is used to handle any non-customer facing operations. These operations can include posting readings to the database, and pulling data for system output on the display. 
+The controller API container is used to handle any non-customer facing, system level operations. These operations can include changeing the IP, and getting the system stats.
 
 ## API endpoint
 Get a token
@@ -13,7 +13,7 @@ Get a token
 
 ### Code Ex
 ```python
-r = requests.get('http://controller:7443/api/1.0/token', auth=requests.auth.HTTPBasicAuth('controller', 'rackbrain'))
+r = requests.get('http://controller-api:7443/api/1.0/token', auth=requests.auth.HTTPBasicAuth('controller', 'rackbrain'))
 out = r.raise_for_status()
 if(out != None):
     raise Exception(out)
