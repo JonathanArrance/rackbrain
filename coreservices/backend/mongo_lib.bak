@@ -85,7 +85,7 @@ class Reading(db.Document):
 
     def reading_time(self):
         self.reading_time = time.time()
-        return self.reading_time
+        return self.reading_time
 class RackBrainSys(db.Document):
     rackid = db.AnythingField()
     manufacture_date = db.AnythingField()

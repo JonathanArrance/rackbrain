@@ -6,13 +6,20 @@ import random
 import datetime
 import sys
 
-def start_mongo():
-    pass
-
 def nuke_mongo():
+    """
+    esc: Delete and recreate the MongoDB
+    """
     pass
 
 def setup_mongo():
+    """
+    Desc: Setup the initial Mongo DB
+    Input: None
+    Output: None
+    Error: None
+    Note: None
+    """
     #Mongo connection
     client = MongoClient(settings.MONGO_HOST, int(settings.MONGO_PORT))
     db = client[settings.MONGO_DBNAME]

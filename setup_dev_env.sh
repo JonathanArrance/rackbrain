@@ -4,6 +4,9 @@
 COMPOSE='1.23.2'
 DOCKER='18.06.0.ce'
 
+#Is the pi a dev system or not
+DEV='True'
+
 if [ "$EUID" -ne 0 ]
   then echo "Please run as root"
   exit
@@ -20,6 +23,12 @@ fi
 echo 'Set iptables'
 iptables -A INPUT -p tcp --dport 8443 -j ACCEPT
 /sbin/service iptables save
+
+if [ $DEV -ne 'True' ]
+  then echo "Addin the ports needed for external access to backend serivces"
+  iptables -A INPUT -p tcp --dport 9443 -j ACCEPT
+  /sbin/service iptables save
+fi
 
 echo 'Cleaning off Docker if present.'
 apt-get remove docker docker-engine docker.io
