@@ -6,6 +6,7 @@ IoT device used to monitor the status of AV or IT rack. Moreover Rackbrain can b
 2. Docker - Docker version 18.06.0-ce
 3. Dev Language - Python 2.7.13 with support for 3.5
 4. Mongo - Mongo 3.0.4 (32bit mongo, 2gb Data limit)
+5.
 
 ## Things Board
 MQTT integration with Things Board - Todo
