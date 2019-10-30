@@ -10,7 +10,7 @@ flask==1.0.2
 Jinja2==2.10
 click==7.0
 MarkupSafe==1.1.0
-Werkzeug==0.14.1
+Werkzeug==0.15.3
 itsdangerous==1.1.0
 passlib==1.7.1
 #urllib3==1.19.1
