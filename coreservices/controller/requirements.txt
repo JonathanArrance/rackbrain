@@ -7,7 +7,7 @@ IPy==0.75
 pymongo==2.8.1
 mongoalchemy==0.19
 flask==1.0.2
-Jinja2==2.10
+Jinja2==2.11.3
 click==7.0
 MarkupSafe==1.1.0
 Werkzeug==0.14.1
